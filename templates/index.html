@@ -1,0 +1,102 @@
+<form action="/add_contact" method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre" required>
+    <input type="text" name="matricula" placeholder="Matricula" required>
+    <input type="text" name="correo" placeholder="Correo" required>
+    <button type="submit"> Guardar </button>
+
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Matrícula</td>
+            <td>Correo</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios%} 
+            <tr>
+                <td>{{ usuario.1 }}</td>
+                <td>{{ usuario.2 }}</td>
+                <td>{{ usuario.3 }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #4CAF50; 
+        color: white; 
+        padding: 10px;
+        border-bottom: 2px solid #ddd; 
+    }
+
+    td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd; 
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; 
+    }
+
+    tr:hover {
+        background-color: #ddd; 
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+</style>
+<style>       
+    form {
+        max-width: 400px; 
+        margin: 0 auto; 
+        padding: 20px; 
+        border: 1px solid #ddd; 
+        border-radius: 8px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        background-color: #f9f9f9; 
+    }
+
+    input[type="text"] {
+        width: 100%; 
+        padding: 10px; 
+        margin: 10px 0; 
+        border: 1px solid #ccc; 
+        border-radius: 4px; 
+        box-sizing: border-box; 
+    }
+
+    button {
+        width: 100%; 
+        padding: 10px; 
+        background-color: #4CAF50; 
+        color: white; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 16px; 
+        transition: background-color 0.3s ease; 
+    }
+
+    button:hover {
+        background-color: #45a049; 
+    }
+
+    input::placeholder {
+        color: #999; 
+        font-style: italic; 
+    }
+</style>

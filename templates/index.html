@@ -1,5 +1,6 @@
 <form action="/add_contact" method="POST">
 
+    <h2>Ingresar Datos</h2>
     <input type="text" name="nombre" placeholder="Nombre" required>
     <input type="text" name="matricula" placeholder="Matricula" required>
     <input type="text" name="correo" placeholder="Correo" required>
@@ -13,6 +14,8 @@
             <td>Nombre</td>
             <td>Matrícula</td>
             <td>Correo</td>
+            <td>Editar</td>
+            <td>Borrar</td>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +24,8 @@
                 <td>{{ usuario.1 }}</td>
                 <td>{{ usuario.2 }}</td>
                 <td>{{ usuario.3 }}</td>
+                <td><a href="/edit/{{ usuario.0 }}"><button class="btn btn-primary">Editar</button></a></td>
+                <td><a href="/delete/{{ usuario.0 }}"><button class="btn btn-secondary">Borrar</button></a></td>
             </tr>
         {% endfor %}
     </tbody>
@@ -70,6 +75,13 @@
         background-color: #f9f9f9; 
     }
 
+    form h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #343a40;
+        text-align: center;
+    }
+
     input[type="text"] {
         width: 100%; 
         padding: 10px; 
@@ -98,5 +110,38 @@
     input::placeholder {
         color: #999; 
         font-style: italic; 
+    }
+</style>
+
+<style>
+    .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: red;
+    }
+
+    .btn-secondary:hover {
+        background-color: rgb(255, 61, 61);
+    }
+
+    /* Optional: Adding a little effect on hover */
+    .btn:active {
+        transform: scale(0.98);
     }
 </style>

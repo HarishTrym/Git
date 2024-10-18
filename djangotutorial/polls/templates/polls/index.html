@@ -1,3 +1,5 @@
+<a href="{% url 'polls:create_question' %}" >Create new question</a>
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

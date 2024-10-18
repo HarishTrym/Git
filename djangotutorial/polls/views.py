@@ -1,8 +1,9 @@
 from django.db.models import F
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
+from .forms import ChoiceForm, QuestionForm
 from .models import Choice, Question
 
 
@@ -45,3 +46,30 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+def create_question(request):
+    if request.method == 'POST':
+        question_form = QuestionForm(request.POST)
+        if question_form.is_valid():
+            question = question_form.save()
+            return redirect('polls:add_choices', question_id=question.id)
+
+    else:
+        question_form = QuestionForm()
+
+    return render(request, 'polls/create_question.html', {'form': question_form})
+
+def add_choices(request, question_id):
+    question = Question.objects.get(id=question_id)
+    if request.method == 'POST':
+        choice_form = ChoiceForm(request.POST)
+        if choice_form.is_valid():
+            choice = choice_form.save(commit=False)
+            choice.question = question
+            choice.save()
+            return redirect('polls:add_choices', question_id=question.id)
+
+    else:
+        choice_form = ChoiceForm()
+
+    return render(request, 'polls/add_choices.html', {'form': choice_form, 'question': question})

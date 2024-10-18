@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Opciones</title>
+</head>
+<body>
+    <h1>Agregar Opciones para: {{ question.question_text }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Opción</button>
+    </form>
+    <a href="{% url 'polls:create_question' %}">Agregar otra pregunta</a>
+    <p><a href="/polls">Salir</a></p>
+</body>
+</html>
